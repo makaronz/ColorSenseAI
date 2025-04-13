@@ -1,0 +1,4 @@
+2025-04-13 08:29:34,927 - ArduinoClient - ERROR - Błąd podczas łączenia z symulatorem: [Errno 61] Connection refused
+2025-04-13 08:29:34,928 - ArduinoClient - ERROR - Nie można połączyć się z symulatorem
+2025-04-13 08:29:34,928 - ArduinoClient - INFO - Zatrzymano zapisywanie danych
+2025-04-13 08:29:34,928 - ArduinoClient - INFO - Rozłączono z symulatorem
