@@ -2,6 +2,8 @@ import os
 import json
 import logging
 from typing import Dict, List, Optional
+from datetime import datetime
+from .data_manager import MLDataManager
 
 # Konfiguracja logowania
 logging.basicConfig(
@@ -24,14 +26,32 @@ class MLFeatureManager:
             config_path: Ścieżka do pliku konfiguracyjnego
         """
         self.config_path = config_path
+        self.data_manager = MLDataManager()
         self.features = {
-            "color_correction": False,
-            "anomaly_detection": False,
-            "sensor_optimization": False,
-            "adaptive_calibration": False,
-            "self_learning": False,
-            "failure_prediction": False,
-            "power_optimization": False
+            "color_correction": {
+                "enabled": False,
+                "last_training": None,
+                "performance_metrics": {},
+                "model_path": None
+            },
+            "anomaly_detection": {
+                "enabled": False,
+                "last_training": None,
+                "performance_metrics": {},
+                "model_path": None
+            },
+            "sensor_optimization": {
+                "enabled": False,
+                "last_training": None,
+                "performance_metrics": {},
+                "model_path": None
+            },
+            "adaptive_calibration": {
+                "enabled": False,
+                "last_training": None,
+                "performance_metrics": {},
+                "model_path": None
+            }
         }
         
         # Utwórz katalog konfiguracyjny, jeśli nie istnieje
@@ -51,7 +71,7 @@ class MLFeatureManager:
             True, jeśli funkcja została włączona, False w przeciwnym razie
         """
         if feature_name in self.features:
-            self.features[feature_name] = True
+            self.features[feature_name]["enabled"] = True
             logger.info(f"Funkcja {feature_name} została włączona")
             self.save_config()
             return True
@@ -70,7 +90,7 @@ class MLFeatureManager:
             True, jeśli funkcja została wyłączona, False w przeciwnym razie
         """
         if feature_name in self.features:
-            self.features[feature_name] = False
+            self.features[feature_name]["enabled"] = False
             logger.info(f"Funkcja {feature_name} została wyłączona")
             self.save_config()
             return True
@@ -88,7 +108,7 @@ class MLFeatureManager:
         Returns:
             True, jeśli funkcja jest włączona, False w przeciwnym razie
         """
-        return self.features.get(feature_name, False)
+        return self.features.get(feature_name, {}).get("enabled", False)
         
     def get_enabled_features(self) -> List[str]:
         """
@@ -97,8 +117,82 @@ class MLFeatureManager:
         Returns:
             Lista włączonych funkcji
         """
-        return [feature for feature, enabled in self.features.items() if enabled]
+        return [feature for feature, config in self.features.items() if config["enabled"]]
+
+    def update_feature_metrics(self, feature_name: str, metrics: Dict[str, float], model_path: str) -> bool:
+        """
+        Aktualizuje metryki wydajności dla danej funkcji ML.
         
+        Args:
+            feature_name: Nazwa funkcji
+            metrics: Słownik z metrykami wydajności
+            model_path: Ścieżka do zapisanego modelu
+            
+        Returns:
+            True, jeśli metryki zostały zaktualizowane, False w przeciwnym razie
+        """
+        if feature_name in self.features:
+            self.features[feature_name]["performance_metrics"] = metrics
+            self.features[feature_name]["last_training"] = datetime.now().isoformat()
+            self.features[feature_name]["model_path"] = model_path
+            self.save_config()
+            
+            # Zapisz metryki w bazie danych
+            self.data_manager.save_model_results(
+                model_name=feature_name,
+                version=datetime.now().strftime("%Y%m%d_%H%M%S"),
+                metrics=metrics,
+                model_path=model_path,
+                parameters={}
+            )
+            return True
+        return False
+
+    def get_feature_metrics(self, feature_name: str) -> Optional[Dict]:
+        """
+        Pobiera metryki wydajności dla danej funkcji ML.
+        
+        Args:
+            feature_name: Nazwa funkcji
+            
+        Returns:
+            Słownik z metrykami lub None, jeśli funkcja nie istnieje
+        """
+        if feature_name in self.features:
+            return {
+                "metrics": self.features[feature_name]["performance_metrics"],
+                "last_training": self.features[feature_name]["last_training"],
+                "model_path": self.features[feature_name]["model_path"]
+            }
+        return None
+
+    def prepare_training_data(self, feature_name: str, hours: int = 24) -> Optional[tuple]:
+        """
+        Przygotowuje dane treningowe dla danej funkcji ML.
+        
+        Args:
+            feature_name: Nazwa funkcji
+            hours: Liczba godzin danych do przygotowania
+            
+        Returns:
+            Tuple (X, y) z danymi treningowymi lub None w przypadku błędu
+        """
+        try:
+            if feature_name == "color_correction":
+                return self.data_manager.prepare_color_correction_data(hours)
+            elif feature_name == "anomaly_detection":
+                return self.data_manager.prepare_anomaly_detection_data(hours)
+            elif feature_name == "sensor_optimization":
+                return self.data_manager.prepare_sensor_optimization_data(hours)
+            elif feature_name == "adaptive_calibration":
+                return self.data_manager.prepare_calibration_data(hours)
+            else:
+                logger.warning(f"Nieznana funkcja ML: {feature_name}")
+                return None
+        except Exception as e:
+            logger.error(f"Błąd podczas przygotowywania danych dla {feature_name}: {str(e)}")
+            return None
+            
     def save_config(self) -> bool:
         """
         Zapisuje konfigurację funkcji ML do pliku.
@@ -130,7 +224,7 @@ class MLFeatureManager:
                 # Aktualizuj tylko istniejące funkcje
                 for feature in self.features:
                     if feature in loaded_features:
-                        self.features[feature] = loaded_features[feature]
+                        self.features[feature].update(loaded_features[feature])
                         
                 logger.info(f"Konfiguracja załadowana z {self.config_path}")
                 return True
@@ -140,68 +234,4 @@ class MLFeatureManager:
                 return False
         except Exception as e:
             logger.error(f"Błąd podczas ładowania konfiguracji: {str(e)}")
-            return False
-            
-    def reset_to_defaults(self) -> bool:
-        """
-        Resetuje konfigurację funkcji ML do wartości domyślnych.
-        
-        Returns:
-            True, jeśli konfiguracja została zresetowana, False w przeciwnym razie
-        """
-        try:
-            self.features = {
-                "color_correction": False,
-                "anomaly_detection": False,
-                "sensor_optimization": False,
-                "adaptive_calibration": False,
-                "self_learning": False,
-                "failure_prediction": False,
-                "power_optimization": False
-            }
-            
-            self.save_config()
-            logger.info("Konfiguracja zresetowana do wartości domyślnych")
-            return True
-        except Exception as e:
-            logger.error(f"Błąd podczas resetowania konfiguracji: {str(e)}")
-            return False
-            
-    def add_feature(self, feature_name: str, enabled: bool = False) -> bool:
-        """
-        Dodaje nową funkcję ML.
-        
-        Args:
-            feature_name: Nazwa nowej funkcji
-            enabled: Czy funkcja ma być włączona
-            
-        Returns:
-            True, jeśli funkcja została dodana, False w przeciwnym razie
-        """
-        if feature_name not in self.features:
-            self.features[feature_name] = enabled
-            logger.info(f"Dodano nową funkcję: {feature_name}, włączona: {enabled}")
-            self.save_config()
-            return True
-        else:
-            logger.warning(f"Funkcja {feature_name} już istnieje")
-            return False
-            
-    def remove_feature(self, feature_name: str) -> bool:
-        """
-        Usuwa funkcję ML.
-        
-        Args:
-            feature_name: Nazwa funkcji do usunięcia
-            
-        Returns:
-            True, jeśli funkcja została usunięta, False w przeciwnym razie
-        """
-        if feature_name in self.features:
-            del self.features[feature_name]
-            logger.info(f"Usunięto funkcję: {feature_name}")
-            self.save_config()
-            return True
-        else:
-            logger.warning(f"Próba usunięcia nieistniejącej funkcji: {feature_name}")
             return False
