@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorSenseAI Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button id="menu-toggle" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <h1>ColorSenseAI</h1>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="notifications">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="notification-dropdown">
+                        <div class="notification-item">
+                            <div class="notification-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Calibration Complete</p>
+                                <p class="notification-desc">Sensor calibration completed successfully</p>
+                                <p class="notification-time">2 minutes ago</p>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Exposure Warning</p>
+                                <p class="notification-desc">High light exposure detected</p>
+                                <p class="notification-time">15 minutes ago</p>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon error">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Connection Error</p>
+                                <p class="notification-desc">Unable to connect to sensor #3</p>
+                                <p class="notification-time">1 hour ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-profile">
+                    <button class="profile-btn">
+                        <img src="https://via.placeholder.com/40" alt="User Profile">
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Sidebar Menu -->
+            <aside class="sidebar" id="sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="nav-item active" data-panel="dashboard">
+                            <a href="#dashboard">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-panel="spectral">
+                            <a href="#spectral">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Spectral Analysis</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-panel="exposure">
+                            <a href="#exposure">
+                                <i class="fas fa-sun"></i>
+                                <span>Exposure Monitoring</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-panel="ml">
+                            <a href="#ml">
+                                <i class="fas fa-brain"></i>
+                                <span>Machine Learning</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#settings">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#help">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <div class="version">v1.0.0</div>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content" id="content">
+                <!-- Dashboard Panel -->
+                <section class="panel active" id="dashboard-panel">
+                    <div class="panel-header">
+                        <h2>Dashboard</h2>
+                        <div class="time-filter">
+                            <button class="time-btn active">Day</button>
+                            <button class="time-btn">Week</button>
+                            <button class="time-btn">Month</button>
+                            <button class="time-btn">Year</button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="status-cards">
+                            <div class="card status-card">
+                                <div class="card-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Sensors Online</h3>
+                                    <p class="card-value">3/3</p>
+                                    <p class="card-trend positive">
+                                        <i class="fas fa-arrow-up"></i> All sensors connected
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card status-card">
+                                <div class="card-icon info">
+                                    <i class="fas fa-thermometer-half"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Avg. Temperature</h3>
+                                    <p class="card-value">24.5°C</p>
+                                    <p class="card-trend negative">
+                                        <i class="fas fa-arrow-down"></i> 1.2°C since yesterday
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card status-card">
+                                <div class="card-icon warning">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Light Exposure</h3>
+                                    <p class="card-value">High</p>
+                                    <p class="card-trend neutral">
+                                        <i class="fas fa-minus"></i> No change
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card status-card">
+                                <div class="card-icon error">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Alerts</h3>
+                                    <p class="card-value">3</p>
+                                    <p class="card-trend negative">
+                                        <i class="fas fa-arrow-up"></i> 2 since yesterday
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="charts-container">
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h3>Color Temperature & Tint</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="colorReadingsChart"></canvas>
+                                    <div class="chart-explanation">
+                                        <p><i class="fas fa-info-circle"></i> Color temperature (K) and tint values are calculated using sensor fusion from AS7262, TSL2591, and SEN0611 data.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h3>Sensor Performance</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="sensorPerformanceChart"></canvas>
+                                    <div class="chart-explanation">
+                                        <p><i class="fas fa-info-circle"></i> Performance metrics are based on accuracy and response time benchmarks for each sensor.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Raw Sensor Data Section -->
+                        <div class="section-header">
+                            <h3>Raw Sensor Data</h3>
+                            <p>Direct readings from the three primary sensors</p>
+                        </div>
+                        
+                        <div class="raw-sensor-container">
+                            <div class="card sensor-card">
+                                <div class="card-header">
+                                    <h3>AS7262 - 6-Channel Spectral Sensor</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="as7262Chart"></canvas>
+                                    <div class="sensor-info">
+                                        <p><strong>Sensor Description:</strong> The AS7262 is a 6-channel visible light spectral sensor that measures light intensity at specific wavelengths (450nm, 500nm, 550nm, 570nm, 600nm, 650nm).</p>
+                                        <p><strong>Data Usage:</strong> Spectral data is used to calculate color temperature and tint by analyzing the distribution of light across different wavelengths.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card sensor-card">
+                                <div class="card-header">
+                                    <h3>TSL2591 - High-Precision Luminance Sensor</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="tsl2591Chart"></canvas>
+                                    <div class="sensor-info">
+                                        <p><strong>Sensor Description:</strong> The TSL2591 is a very high sensitivity light-to-digital converter that measures luminance (lux), infrared, and full spectrum light.</p>
+                                        <p><strong>Data Usage:</strong> Luminance data helps calibrate color temperature calculations in different lighting conditions and provides exposure information.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card sensor-card">
+                                <div class="card-header">
+                                    <h3>DFRobot SEN0611 - CCT & ALS Sensor</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="sen0611Chart"></canvas>
+                                    <div class="sensor-info">
+                                        <p><strong>Sensor Description:</strong> The SEN0611 measures Correlated Color Temperature (CCT) in Kelvin and Ambient Light Sensing (ALS) in lux.</p>
+                                        <p><strong>Data Usage:</strong> CCT data provides a direct color temperature reading that helps validate and calibrate the calculations from spectral data.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Optional GPS Module Data -->
+                            <div class="card sensor-card">
+                                <div class="card-header">
+                                    <h3>GPS Module (Optional)</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="gpsChart"></canvas>
+                                    <div class="sensor-info">
+                                        <p><strong>Module Description:</strong> The GPS module provides location data including latitude, longitude, altitude, number of satellites, and HDOP.</p>
+                                        <p><strong>Data Usage:</strong> Location data can be used to correlate color measurements with geographical position and time of day.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Color Calculation Section -->
+                        <div class="section-header">
+                            <h3>Color Temperature & Tint Calculation</h3>
+                            <p>Step-by-step process of calculating camera white balance from sensor data</p>
+                        </div>
+                        
+                        <div class="card calculation-card">
+                            <div class="card-header">
+                                <h3>Calculation Process</h3>
+                                <div class="card-actions">
+                                    <button class="card-action-btn">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="calculation-steps" class="calculation-steps">
+                                    <!-- This content will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="map-container">
+                            <div class="card map-card">
+                                <div class="card-header">
+                                    <h3>Sensor Locations</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="sensorMap" class="sensor-map"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Spectral Analysis Panel -->
+                <section class="panel" id="spectral-panel">
+                    <div class="panel-header">
+                        <h2>Spectral Analysis</h2>
+                        <div class="time-filter">
+                            <button class="time-btn active">Day</button>
+                            <button class="time-btn">Week</button>
+                            <button class="time-btn">Month</button>
+                            <button class="time-btn">Year</button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="charts-container">
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h3>Spectral Distribution</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="spectralDistributionChart"></canvas>
+                                    <div class="chart-explanation">
+                                        <p><i class="fas fa-info-circle"></i> Spectral distribution shows light intensity across different wavelengths measured by the AS7262 sensor.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h3>Color Accuracy</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="colorAccuracyChart"></canvas>
+                                    <div class="chart-explanation">
+                                        <p><i class="fas fa-info-circle"></i> Color accuracy shows how precisely each wavelength is measured compared to reference values.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="heatmap-container">
+                            <div class="card heatmap-card">
+                                <div class="card-header">
+                                    <h3>Spectral Heatmap</h3>
+                                    <div class="card-actions">
+                                        <button class="card-action-btn">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="spectralHeatmapChart"></canvas>
+                                    <div class="chart-explanation">
+                                        <p><i class="fas fa-info-circle"></i> The heatmap visualizes spectral intensity distribution over time and wavelength.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Exposure Monitoring Panel -->
+                <section class="panel" id="exposure-panel">
+                    <div class="panel-header">
+                        <h2>Exposure Monitoring</h2>
+                        <div class="time-filter">
+                            <button class="time-btn active">Day</button>
+                            <button class="time-btn">Week</button>
+                            <button class="time-btn">Month</button>
+                            <button class="time-btn">Year</button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="status-cards">
+                            <div class="card status-card">
+                                <div class="card-icon info">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h3>Current Exposure</h3>
+                                    <p class="card-value">High</p>
+                                    <p class="card-trend negative">
+                                        <i class="fas fa-arrow-up"></i> Increased
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card status-card">
+                                <div class="card-icon success">
+                                    <i class="fas fa-clock"></i>
+                                </div>
