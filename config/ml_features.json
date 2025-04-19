@@ -1,0 +1,26 @@
+{
+    "color_correction": {
+        "enabled": false,
+        "last_training": null,
+        "performance_metrics": {},
+        "model_path": null
+    },
+    "anomaly_detection": {
+        "enabled": false,
+        "last_training": null,
+        "performance_metrics": {},
+        "model_path": null
+    },
+    "sensor_optimization": {
+        "enabled": false,
+        "last_training": null,
+        "performance_metrics": {},
+        "model_path": null
+    },
+    "adaptive_calibration": {
+        "enabled": false,
+        "last_training": null,
+        "performance_metrics": {},
+        "model_path": null
+    }
+} 

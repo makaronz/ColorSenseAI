@@ -1,0 +1,15 @@
+2025-04-19 02:27:21,260 - MLFeatureManager - INFO - Plik konfiguracyjny config/ml_features.json nie istnieje, używam domyślnej konfiguracji
+2025-04-19 02:27:21,261 - MLFeatureManager - INFO - Konfiguracja zapisana do config/ml_features.json
+2025-04-19 02:27:21,261 - ColorSense - INFO - Menedżer ML zainicjalizowany
+2025-04-19 02:27:21,261 - ColorSense - INFO - System analizy zainicjalizowany
+2025-04-19 02:27:21,278 - ColorSense - ERROR - Błąd podczas uruchamiania aplikacji: (sqlite3.OperationalError) no such table: sensor_readings
+[SQL: SELECT sensor_readings.id AS sensor_readings_id, sensor_readings.timestamp AS sensor_readings_timestamp, sensor_readings.as7262_450nm AS sensor_readings_as7262_450nm, sensor_readings.as7262_500nm AS sensor_readings_as7262_500nm, sensor_readings.as7262_550nm AS sensor_readings_as7262_550nm, sensor_readings.as7262_570nm AS sensor_readings_as7262_570nm, sensor_readings.as7262_600nm AS sensor_readings_as7262_600nm, sensor_readings.as7262_650nm AS sensor_readings_as7262_650nm, sensor_readings.as7262_temperature AS sensor_readings_as7262_temperature, sensor_readings.tsl2591_lux AS sensor_readings_tsl2591_lux, sensor_readings.tsl2591_ir AS sensor_readings_tsl2591_ir, sensor_readings.tsl2591_full AS sensor_readings_tsl2591_full, sensor_readings.sen0611_cct AS sensor_readings_sen0611_cct, sensor_readings.sen0611_als AS sensor_readings_sen0611_als, sensor_readings.latitude AS sensor_readings_latitude, sensor_readings.longitude AS sensor_readings_longitude, sensor_readings.altitude AS sensor_readings_altitude, sensor_readings.satellites AS sensor_readings_satellites, sensor_readings.ambient_temperature AS sensor_readings_ambient_temperature 
+FROM sensor_readings ORDER BY sensor_readings.timestamp DESC
+ LIMIT ? OFFSET ?]
+[parameters: (10, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-19 02:27:43,904 - ColorSense - INFO - Baza danych zainicjalizowana
+2025-04-19 02:27:43,905 - MLFeatureManager - INFO - Konfiguracja załadowana z config/ml_features.json
+2025-04-19 02:27:43,905 - ColorSense - INFO - Menedżer ML zainicjalizowany
+2025-04-19 02:27:43,905 - ColorSense - INFO - System analizy zainicjalizowany
+2025-04-19 02:27:43,913 - ColorSense - WARNING - Brak dostępnych odczytów
