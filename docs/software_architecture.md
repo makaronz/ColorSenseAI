@@ -59,7 +59,21 @@ ColorSense is built on a modular architecture that combines hardware control, da
   - Control commands
   - Status updates
 
-### 5. Database Layer
+### 5. Dashboard Layer
+- **Frontend Components**
+  - Main dashboard panel
+  - Spectral analysis panel
+  - Exposure monitoring panel
+  - Machine learning panel
+  - Notification system
+
+- **Data Visualization**
+  - Real-time charts
+  - Status indicators
+  - Data tables
+  - Calculation explanations
+
+### 6. Database Layer
 - **Data Storage**
   - Sensor readings
   - Calibration data
@@ -132,6 +146,12 @@ class AdaptiveCalibrationSystem:
    - Data formatting
    - Response generation
    - Error reporting
+
+5. **Data to Dashboard**
+   - Data transformation for visualization
+   - Real-time updates
+   - User interface rendering
+   - Interactive feedback
 
 ## Configuration Management
 
@@ -209,6 +229,12 @@ class AdaptiveCalibrationSystem:
 - Request batching
 - Compression
 
+### 5. Dashboard Level
+- Asset optimization
+- Lazy loading
+- DOM manipulation efficiency
+- Rendering optimization
+
 ## Security Considerations
 
 ### 1. Data Security
@@ -235,6 +261,12 @@ class AdaptiveCalibrationSystem:
 - Update management
 - Backup procedures
 
+### 5. Dashboard Security
+- Input validation
+- Cross-site scripting prevention
+- Content security policy
+- Local storage protection
+
 ## Testing Strategy
 
 1. **Unit Testing**
@@ -246,6 +278,7 @@ class AdaptiveCalibrationSystem:
    - Sensor fusion
    - System communication
    - User interface
+   - Dashboard functionality
 
 3. **Performance Testing**
    - Response times
@@ -262,4 +295,88 @@ class AdaptiveCalibrationSystem:
 2. **Update Process**
    - Firmware updates
    - Configuration updates
-   - Security patches 
+   - Security patches
+   - Dashboard updates
+
+## Dashboard Architecture
+
+### 1. Frontend Structure
+- **Component Organization**
+  - Core UI components
+  - Chart components
+  - Data display components
+  - Control components
+
+- **Data Management**
+  - Local data store
+  - Update mechanisms
+  - State management
+  - Event handling
+
+### 2. Dashboard Modules
+- **Main Dashboard Module**
+  ```javascript
+  class DashboardModule {
+      constructor() {
+          this.dataManager = new DataManager();
+          this.uiComponents = new UIComponentManager();
+          this.notificationSystem = new NotificationSystem();
+      }
+  }
+  ```
+
+- **Spectral Analysis Module**
+  ```javascript
+  class SpectralAnalysisModule {
+      constructor() {
+          this.spectralChart = new SpectralChart();
+          this.calculationDisplay = new CalculationDisplay();
+          this.dataProcessor = new SpectralDataProcessor();
+      }
+  }
+  ```
+
+- **Exposure Monitoring Module**
+  ```javascript
+  class ExposureMonitoringModule {
+      constructor() {
+          this.exposureIndicators = new ExposureIndicators();
+          this.luminanceChart = new LuminanceChart();
+          this.warningSystem = new WarningSystem();
+      }
+  }
+  ```
+
+- **Machine Learning Module**
+  ```javascript
+  class MLModule {
+      constructor() {
+          this.featureDisplay = new MLFeatureDisplay();
+          this.modelPerformance = new ModelPerformanceDisplay();
+          this.dataUtilization = new DataUtilizationDisplay();
+      }
+  }
+  ```
+
+### 3. Dashboard Data Flow
+1. **Data Acquisition**
+   - Sample data loading
+   - Arduino data simulation
+   - Data formatting
+
+2. **Data Processing**
+   - Calculation of derived values
+   - Data transformation for visualization
+   - Statistical analysis
+
+3. **Visualization**
+   - Chart rendering
+   - Indicator updates
+   - Status display
+   - Notification generation
+
+4. **User Interaction**
+   - Control input handling
+   - View switching
+   - Parameter adjustment
+   - Information display

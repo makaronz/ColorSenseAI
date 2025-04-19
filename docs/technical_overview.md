@@ -96,6 +96,7 @@
 - REST API endpoints
 - WebSocket real-time streaming
 - Database synchronization
+- Browser dashboard visualization
 
 ### Data Formats
 - JSON/XML metadata
@@ -117,8 +118,56 @@
 - Database server
 - Web server
 
+## Browser Dashboard
+
+### Dashboard Architecture
+- **Frontend Technologies**
+  - HTML5/CSS3/JavaScript
+  - Responsive design framework
+  - Chart.js for data visualization
+  - Custom UI components
+
+- **Data Handling**
+  - Local data processing
+  - JSON data format
+  - Real-time updates
+  - Sample data simulation
+
+### Dashboard Components
+1. **Main Dashboard Panel**
+   - Raw data display
+   - Status cards
+   - System overview
+   - Quick navigation
+
+2. **Spectral Analysis Panel**
+   - 6-channel spectral visualization
+   - Wavelength distribution charts
+   - Color space mapping
+   - Calculation explanations
+
+3. **Exposure Monitoring Panel**
+   - Luminance indicators
+   - Dynamic range visualization
+   - Exposure warnings
+   - Measurement history
+
+4. **Machine Learning Panel**
+   - ML feature utilization
+   - Data processing visualization
+   - Model performance metrics
+   - Training data insights
+
+### Technical Implementation
+- Modular JavaScript architecture
+- Component-based UI design
+- Responsive grid layout
+- Cross-browser compatibility
+- Local data processing without backend dependency
+
 ## Future Development Roadmap
 1. Machine learning integration
 2. Cloud synchronization
 3. Mobile app support
-4. Advanced analytics 
+4. Advanced analytics
+5. Dashboard enhancements

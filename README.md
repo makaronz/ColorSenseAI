@@ -31,6 +31,13 @@ ColorSense is a sophisticated measurement system that combines three different s
   - Data validation and error handling
   - Configurable output formats
 
+- **Browser Dashboard**
+  - Real-time data visualization
+  - Spectral analysis charts
+  - Exposure monitoring indicators
+  - Detailed calculation explanations
+  - Responsive design for various devices
+
 ### Machine Learning Features
 - **Color Correction**
   - Neural network-based color temperature prediction
@@ -68,6 +75,10 @@ ColorSense/
 │   ├── services/       # Business logic
 │   │   └── ml/         # Machine learning services
 │   └── utils/          # Utility functions
+├── dashboard/          # Browser dashboard
+│   ├── css/            # Dashboard styles
+│   ├── js/             # Dashboard scripts
+│   └── assets/         # Dashboard assets
 ├── docs/               # Documentation
 ├── config/             # Configuration files
 │   └── ml_features.json # ML feature configuration
@@ -128,6 +139,7 @@ ml_manager.disable_feature("anomaly_detection")
 4. Configure ML features in `config/ml_features.json`
 5. Upload Arduino firmware: `src/arduino/main.ino`
 6. Run the API server: `python src/main.py`
+7. Open the dashboard: `dashboard/index.html`
 
 ## Documentation
 
@@ -135,10 +147,13 @@ Detailed documentation is available in the `docs/` directory:
 
 - [Hardware Setup](docs/hardware_setup.md)
 - [Software Architecture](docs/software_architecture.md)
+- [Technical Overview](docs/technical_overview.md)
+- [Feature Extensions](docs/feature_extensions.md)
 - [API Documentation](docs/api.md)
 - [Calibration Guide](docs/calibration.md)
 - [Machine Learning Guide](docs/ml_guide.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Dashboard Guide](docs/dashboard_guide.md)
 
 ## Contributing
 
