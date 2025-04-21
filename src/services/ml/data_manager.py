@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
-from typing import Tuple, List, Dict, Optional
+from datetime import datetime, timedelta, UTC
+from typing import Tuple, List, Dict, Optional, Any
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from database.operations import get_latest_readings
@@ -26,7 +26,7 @@ class MLDataManager:
         """
         session = get_session()
         try:
-            end_time = datetime.utcnow()
+            end_time = datetime.now(UTC)
             start_time = end_time - timedelta(hours=hours)
             
             readings = session.query(SensorReading).filter(
@@ -68,7 +68,7 @@ class MLDataManager:
         """
         session = get_session()
         try:
-            end_time = datetime.utcnow()
+            end_time = datetime.now(UTC)
             start_time = end_time - timedelta(hours=hours)
             
             readings = session.query(SensorReading).filter(
@@ -111,7 +111,7 @@ class MLDataManager:
         """
         session = get_session()
         try:
-            end_time = datetime.utcnow()
+            end_time = datetime.now(UTC)
             start_time = end_time - timedelta(hours=hours)
             
             readings = session.query(SensorReading).filter(
@@ -126,19 +126,24 @@ class MLDataManager:
             
             # Przygotuj cechy (warunki pomiarowe)
             X = np.array([[
-                r.ambient_temperature,
-                r.tsl2591_lux,
-                r.sen0611_als,
-                r.as7262_temperature
-            ] for r in readings])
+                float(getattr(r, 'ambient_temperature')),
+                float(getattr(r, 'tsl2591_lux')),
+                float(getattr(r, 'sen0611_als')),
+                float(getattr(r, 'as7262_temperature'))
+            ] for r in readings], dtype=np.float64)
             
             # Przygotuj etykiety (zakładamy, że optymalne parametry to średnie wartości)
+            spectrum_values = np.array([[
+                float(getattr(r, 'as7262_450nm')), float(getattr(r, 'as7262_500nm')), 
+                float(getattr(r, 'as7262_550nm')), float(getattr(r, 'as7262_570nm')), 
+                float(getattr(r, 'as7262_600nm')), float(getattr(r, 'as7262_650nm'))
+            ] for r in readings], dtype=np.float64)
+            
             y = np.array([[
-                np.mean([r.as7262_450nm, r.as7262_500nm, r.as7262_550nm,
-                        r.as7262_570nm, r.as7262_600nm, r.as7262_650nm]),
-                r.tsl2591_full,
-                r.sen0611_cct
-            ] for r in readings])
+                np.mean(spectrum),
+                float(getattr(r, 'tsl2591_full')),
+                float(getattr(r, 'sen0611_cct'))
+            ] for r, spectrum in zip(readings, spectrum_values)], dtype=np.float64)
             
             # Normalizacja danych
             X = self.scaler.fit_transform(X)
@@ -161,7 +166,7 @@ class MLDataManager:
         """
         session = get_session()
         try:
-            end_time = datetime.utcnow()
+            end_time = datetime.now(UTC)
             start_time = end_time - timedelta(hours=hours)
             
             readings = session.query(SensorReading).filter(
@@ -203,14 +208,14 @@ class MLDataManager:
             session.close()
     
     def get_training_validation_split(self, X: np.ndarray, y: np.ndarray,
-                                    test_size: float = 0.2, random_state: int = 42) -> Tuple:
+                                    test_size: float = 0.2, random_state: int = 42) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         """
         Dzieli dane na zbiór treningowy i walidacyjny.
         """
         return train_test_split(X, y, test_size=test_size, random_state=random_state)
     
     def save_model_results(self, model_name: str, version: str, metrics: Dict[str, float],
-                          model_path: str, parameters: Dict[str, any]) -> None:
+                          model_path: str, parameters: Dict[str, Any]) -> None:
         """
         Zapisuje wyniki modelu do bazy danych.
         """

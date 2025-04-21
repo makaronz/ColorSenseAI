@@ -61,17 +61,21 @@ ColorSense is built on a modular architecture that combines hardware control, da
 
 ### 5. Dashboard Layer
 - **Frontend Components**
-  - Main dashboard panel
-  - Spectral analysis panel
-  - Exposure monitoring panel
-  - Machine learning panel
-  - Notification system
+  - Main dashboard panel with raw data and status cards
+  - Spectral analysis panel with 6-channel visualization
+  - Exposure monitoring panel with luminance tracking
+  - Machine learning panel with feature utilization display
+  - Notification system with priority-based alerts
+  - Collapsible sidebar for navigation
+  - Responsive layout system for different devices
 
 - **Data Visualization**
-  - Real-time charts
-  - Status indicators
-  - Data tables
-  - Calculation explanations
+  - Real-time charts with Chart.js integration
+  - Status indicators with color-coded states
+  - Data tables with formatted sensor readings
+  - Calculation explanations with step-by-step methodology
+  - Interactive elements for user exploration
+  - Time-based filtering options
 
 ### 6. Database Layer
 - **Data Storage**
@@ -302,16 +306,18 @@ class AdaptiveCalibrationSystem:
 
 ### 1. Frontend Structure
 - **Component Organization**
-  - Core UI components
-  - Chart components
-  - Data display components
-  - Control components
+  - Core UI components (sidebar, navigation, cards, panels)
+  - Chart components (line, bar, radar, doughnut charts)
+  - Data display components (tables, indicators, gauges)
+  - Control components (buttons, toggles, selectors)
+  - Notification components (alerts, messages, badges)
 
 - **Data Management**
-  - Local data store
-  - Update mechanisms
-  - State management
-  - Event handling
+  - Local data store with structured JSON format
+  - Update mechanisms with polling and event triggers
+  - State management with module-specific data stores
+  - Event handling with publisher-subscriber pattern
+  - Data simulation system for testing and demonstration
 
 ### 2. Dashboard Modules
 - **Main Dashboard Module**
@@ -321,6 +327,21 @@ class AdaptiveCalibrationSystem:
           this.dataManager = new DataManager();
           this.uiComponents = new UIComponentManager();
           this.notificationSystem = new NotificationSystem();
+          this.sidebarManager = new SidebarManager();
+          this.statusCardManager = new StatusCardManager();
+          this.rawDataDisplay = new RawDataDisplay();
+      }
+      
+      initialize() {
+          this.setupEventListeners();
+          this.loadInitialData();
+          this.renderComponents();
+      }
+      
+      updateData(newData) {
+          this.dataManager.processData(newData);
+          this.updateUI();
+          this.checkAlerts();
       }
   }
   ```
@@ -332,6 +353,16 @@ class AdaptiveCalibrationSystem:
           this.spectralChart = new SpectralChart();
           this.calculationDisplay = new CalculationDisplay();
           this.dataProcessor = new SpectralDataProcessor();
+          this.wavelengthDistribution = new WavelengthDistribution();
+          this.colorSpaceMapper = new ColorSpaceMapper();
+      }
+      
+      processSpectralData(data) {
+          const processedData = this.dataProcessor.process(data);
+          this.spectralChart.updateData(processedData);
+          this.wavelengthDistribution.updateData(processedData);
+          this.calculationDisplay.updateExplanations(processedData);
+          return this.colorSpaceMapper.mapToColorSpace(processedData);
       }
   }
   ```
@@ -343,6 +374,16 @@ class AdaptiveCalibrationSystem:
           this.exposureIndicators = new ExposureIndicators();
           this.luminanceChart = new LuminanceChart();
           this.warningSystem = new WarningSystem();
+          this.trendAnalyzer = new TrendAnalyzer();
+          this.comparativeDisplay = new ComparativeDisplay();
+      }
+      
+      analyzeExposure(data) {
+          const trends = this.trendAnalyzer.analyze(data);
+          this.luminanceChart.updateData(data);
+          this.exposureIndicators.updateValues(data);
+          this.comparativeDisplay.updateComparison(data);
+          return this.warningSystem.checkWarnings(data, trends);
       }
   }
   ```
@@ -354,29 +395,45 @@ class AdaptiveCalibrationSystem:
           this.featureDisplay = new MLFeatureDisplay();
           this.modelPerformance = new ModelPerformanceDisplay();
           this.dataUtilization = new DataUtilizationDisplay();
+          this.featureImportance = new FeatureImportanceChart();
+          this.versionComparison = new VersionComparisonChart();
+      }
+      
+      visualizeMLData(data) {
+          this.featureDisplay.updateFeatures(data.activeFeatures);
+          this.modelPerformance.updateMetrics(data.performance);
+          this.dataUtilization.updateUtilization(data.utilization);
+          this.featureImportance.updateChart(data.importance);
+          this.versionComparison.updateComparison(data.versions);
       }
   }
   ```
 
 ### 3. Dashboard Data Flow
 1. **Data Acquisition**
-   - Sample data loading
-   - Arduino data simulation
-   - Data formatting
+   - Sample data loading from simulation.js
+   - Arduino data simulation with realistic patterns
+   - Data formatting with appropriate types and units
+   - Timestamp synchronization and validation
+   - Error handling for missing or invalid data
 
 2. **Data Processing**
-   - Calculation of derived values
-   - Data transformation for visualization
-   - Statistical analysis
+   - Calculation of derived values (CCT, tint, etc.)
+   - Data transformation for visualization (normalization, scaling)
+   - Statistical analysis (min, max, average, trends)
+   - Outlier detection and handling
+   - Data validation and quality assessment
 
 3. **Visualization**
-   - Chart rendering
-   - Indicator updates
-   - Status display
-   - Notification generation
+   - Chart rendering with appropriate chart types
+   - Indicator updates with threshold-based coloring
+   - Status display with real-time information
+   - Notification generation based on data conditions
+   - Responsive layout adjustments for different screens
 
 4. **User Interaction**
-   - Control input handling
-   - View switching
-   - Parameter adjustment
-   - Information display
+   - Control input handling with event listeners
+   - View switching between dashboard panels
+   - Parameter adjustment for visualization options
+   - Information display with tooltips and explanations
+   - Time range selection for historical data viewing

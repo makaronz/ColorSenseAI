@@ -122,48 +122,59 @@
 
 ### Dashboard Architecture
 - **Frontend Technologies**
-  - HTML5/CSS3/JavaScript
-  - Responsive design framework
-  - Chart.js for data visualization
-  - Custom UI components
+  - HTML5 for semantic structure and accessibility
+  - CSS3 with Grid and Flexbox for responsive layouts
+  - JavaScript (ES6+) for interactive functionality
+  - Chart.js for advanced data visualization
+  - Custom UI components with event-driven architecture
 
 - **Data Handling**
-  - Local data processing
-  - JSON data format
-  - Real-time updates
-  - Sample data simulation
+  - Local data processing with browser-based calculations
+  - JSON data format for structured information exchange
+  - Real-time updates via polling mechanism (5-second intervals)
+  - Sample data simulation with realistic sensor patterns
+  - Temporal data management with historical tracking
 
 ### Dashboard Components
 1. **Main Dashboard Panel**
-   - Raw data display
-   - Status cards
-   - System overview
-   - Quick navigation
+   - Raw data display with formatted sensor readings
+   - Status cards with color-coded indicators
+   - System overview with sensor connection status
+   - Quick navigation with panel shortcuts
+   - Notification center for system alerts
 
 2. **Spectral Analysis Panel**
-   - 6-channel spectral visualization
-   - Wavelength distribution charts
-   - Color space mapping
-   - Calculation explanations
+   - 6-channel spectral visualization (450nm, 500nm, 550nm, 570nm, 600nm, 650nm)
+   - Wavelength distribution charts with relative intensity
+   - Color space mapping with CIE coordinates
+   - Calculation explanations with step-by-step methodology
+   - Spectral power distribution visualization
 
 3. **Exposure Monitoring Panel**
-   - Luminance indicators
-   - Dynamic range visualization
-   - Exposure warnings
-   - Measurement history
+   - Luminance indicators with real-time lux readings
+   - Dynamic range visualization with min/max indicators
+   - Exposure warnings with threshold-based alerts
+   - Measurement history with temporal tracking
+   - Comparative analysis between different sensors
 
 4. **Machine Learning Panel**
-   - ML feature utilization
-   - Data processing visualization
-   - Model performance metrics
-   - Training data insights
+   - ML feature utilization with active feature indicators
+   - Data processing visualization with transformation flow
+   - Model performance metrics with accuracy and loss tracking
+   - Training data insights with feature importance
+   - Version comparison for model evolution
 
 ### Technical Implementation
-- Modular JavaScript architecture
-- Component-based UI design
-- Responsive grid layout
-- Cross-browser compatibility
+- Modular JavaScript architecture with separation of concerns
+- Component-based UI design with reusable elements
+- Responsive grid layout with breakpoints for different devices
+- Cross-browser compatibility with progressive enhancement
 - Local data processing without backend dependency
+- Event-driven communication between components
+- Simulation system for generating realistic sensor data
+- Time-based data filtering with customizable ranges
+- Collapsible UI elements for space optimization
+- Notification system with priority levels
 
 ## Future Development Roadmap
 1. Machine learning integration

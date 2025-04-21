@@ -74,5 +74,114 @@ The dashboard is organized into four main panels, each focusing on a specific as
 #### 3. Exposure Monitoring Panel
 
 - **Exposure Indicators**
-  - Luminance measurements (lux)
-  - Dynamic range visualization
+   - Luminance measurements (lux)
+   - Dynamic range visualization
+   - Exposure warnings and alerts
+   - Ambient light sensing (ALS)
+   - Comparative luminance analysis
+
+- **Exposure Trends**
+   - Historical exposure data
+   - Time-based analysis
+   - Pattern recognition
+   - Environmental adaptation
+
+- **Calculation Explanations**
+   - Exposure measurement methodology
+   - Light metering techniques
+   - Dynamic range computation
+   - Exposure value (EV) calculations
+
+#### 4. Machine Learning Panel
+
+- **ML Feature Utilization**
+   - Active ML features display
+   - Feature importance visualization
+   - Model confidence indicators
+   - Real-time prediction display
+
+- **Model Performance**
+   - Accuracy metrics
+   - Loss visualization
+   - Version comparison
+   - Training progress
+
+- **Data Processing Visualization**
+   - Feature extraction illustration
+   - Data transformation flow
+   - Decision process visualization
+   - Confidence scoring
+
+## Dashboard Technical Implementation
+
+### 1. Technology Stack
+
+- **Frontend Technologies**
+   - HTML5 for structure
+   - CSS3 for styling (responsive design)
+   - JavaScript for interactivity
+   - Chart.js for data visualization
+
+- **Data Handling**
+   - JSON data format
+   - Local data processing
+   - Simulated sensor data for demonstration
+   - Real-time updates via polling
+
+### 2. Dashboard Architecture
+
+- **Modular Design**
+   - Component-based structure
+   - Separation of concerns
+   - Event-driven communication
+   - Responsive layout system
+
+- **Data Flow**
+   - Sensor data acquisition
+   - Data transformation and processing
+   - Visualization rendering
+   - User interaction handling
+
+### 3. Local Operation
+
+The dashboard is designed to operate locally without requiring a backend connection:
+   - Uses sample data that simulates Arduino sensor readings
+   - Performs all calculations and transformations in the browser
+   - Stores temporary data in browser memory
+   - Can be run from a local file system or simple web server
+
+## Getting Started
+
+### 1. Launching the Dashboard
+
+1. Navigate to the dashboard directory: `cd dashboard`
+2. Start a local web server: `python -m http.server 8000` (or any other simple web server)
+3. Open a browser and navigate to: `http://localhost:8000`
+
+### 2. Dashboard Navigation
+
+- Use the sidebar menu to switch between different panels
+- Collapse the sidebar using the menu toggle button for more screen space
+- Access notifications through the bell icon in the top navigation bar
+- Use time filter buttons to change the time range for data visualization
+
+### 3. Interpreting the Data
+
+- **Raw Data Section**: Shows direct sensor readings in their original format
+- **Charts and Graphs**: Visualize trends and patterns in the data
+- **Status Cards**: Provide quick overview of key metrics and system status
+- **Calculation Explanations**: Help understand how values are derived
+
+## Customization Options
+
+- **Time Ranges**: Switch between day, week, month, and year views
+- **Chart Types**: Toggle between different visualization formats
+- **Display Options**: Show/hide specific data series or indicators
+- **Layout Adjustments**: Resize panels or change column layouts
+
+## Troubleshooting
+
+- **Data Not Updating**: Check if the simulation is running properly
+- **Charts Not Rendering**: Verify browser compatibility and JavaScript errors
+- **Layout Issues**: Test on different screen sizes and browsers
+- **Performance Problems**: Reduce data points or simplify visualizations

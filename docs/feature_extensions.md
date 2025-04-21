@@ -81,13 +81,16 @@
   - Workflow optimization
 
 - **Browser Dashboard**
-  - Real-time data visualization
-  - Interactive spectral analysis charts
-  - Exposure monitoring indicators
-  - Step-by-step calculation explanations
-  - Responsive design for various devices
-  - Collapsible sidebar menu
-  - Notification system
+  - Real-time data visualization with Chart.js
+  - Interactive spectral analysis charts for 6 wavelength channels
+  - Exposure monitoring indicators with luminance and CCT tracking
+  - Step-by-step calculation explanations for color temperature and tint
+  - Responsive design for various devices with CSS grid layout
+  - Collapsible sidebar menu for space efficiency
+  - Notification system for alerts and status updates
+  - Raw data display from all three sensors
+  - Local operation without backend dependency
+  - Sample data simulation for demonstration purposes
 
 ### 7. Integration Extensions
 - **Third-Party Software**
@@ -263,17 +266,20 @@
 
 ### 4. Dashboard Implementation
 - **Dashboard Panels**
-  - Main Dashboard - Raw data and status cards
-  - Spectral Analysis - Spectral charts and calculations
-  - Exposure Monitoring - Exposure indicators and explanations
-  - Machine Learning - ML data utilization information
+  - Main Dashboard - Raw data display and system status cards
+  - Spectral Analysis - 6-channel spectral charts and detailed calculations
+  - Exposure Monitoring - Luminance tracking and exposure indicators
+  - Machine Learning - Feature utilization and model performance metrics
 
 - **Dashboard Features**
-  - Raw data display from Arduino
-  - Data visualization with charts and indicators
-  - Detailed calculation explanations
-  - Step-by-step color temperature and tint calculations
-  - Responsive layout for different devices
-  - Collapsible sidebar menu
-  - Notification system
-  - Local operation without backend connection
+  - Raw data display from all three sensors (AS7262, TSL2591, SEN0611)
+  - Data visualization with interactive charts and indicators
+  - Detailed calculation explanations with formulas and methodology
+  - Step-by-step color temperature and tint calculations with visual aids
+  - Responsive layout for different devices using CSS grid system
+  - Collapsible sidebar menu for maximizing screen space
+  - Notification system for alerts and status updates
+  - Local operation without backend connection using browser-based processing
+  - Sample data simulation for demonstration and testing
+  - Time-based filtering options (day, week, month, year)
+  - Real-time updates with configurable refresh intervals
