@@ -1,5 +1,146 @@
 # Hardware Setup Guide
 
+## Components List
+
+### Core Components
+- Arduino board (recommended: Arduino Mega 2560 or similar)
+- Power supply unit (5V, 2A minimum)
+- Color sensors (TCS34725 or compatible)
+- Breadboard and jumper wires
+
+### Connectivity Modules
+1. Primary Connection: Wi-Fi HaLow Module
+   - Recommended module: [Specific model to be determined]
+   - Features:
+     - Long-range connectivity (up to 1 km)
+     - Low power consumption
+     - 900 MHz frequency band
+     - IEEE 802.11ah compliant
+
+2. Backup Connection: GSM Module
+   - Recommended module: SIM800L or SIM900
+   - Features:
+     - Quad-band 850/900/1800/1900MHz
+     - GPRS multi-slot class 12/10
+     - SMS support
+     - TCP/IP stack support
+
+## Wiring Instructions
+
+### Wi-Fi HaLow Module Connection
+1. Power connections:
+   - VCC to Arduino 3.3V
+   - GND to Arduino GND
+2. Data connections:
+   - MOSI to Arduino pin 11
+   - MISO to Arduino pin 12
+   - SCK to Arduino pin 13
+   - CS to Arduino pin 10
+   - RST to Arduino pin 9
+   - IRQ to Arduino pin 2
+
+### GSM Module Connection
+1. Power connections:
+   - VCC to regulated 4.2V power supply
+   - GND to common ground
+2. Data connections:
+   - TX to Arduino RX (pin 0)
+   - RX to Arduino TX (pin 1)
+   - RST to Arduino pin 8
+
+### Color Sensor Connection
+[Previous color sensor setup instructions remain unchanged]
+
+## Power Management
+
+The system requires careful power management due to multiple communication modules:
+1. Main power supply: 5V, 2A minimum
+2. Voltage regulators:
+   - 3.3V regulator for Wi-Fi HaLow module
+   - 4.2V regulator for GSM module
+3. Recommended: Add capacitors (100μF) near power inputs of both modules
+
+## Software Configuration
+
+### Wi-Fi HaLow Setup
+1. Install required libraries:
+   ```cpp
+   // Include necessary libraries
+   #include <WiFiHaLow.h>  // Example library name
+   ```
+
+2. Basic configuration:
+   ```cpp
+   // Wi-Fi HaLow configuration
+   #define WIFI_SSID "your_network_name"
+   #define WIFI_PASSWORD "your_password"
+   ```
+
+### GSM Module Setup
+1. Install required libraries:
+   ```cpp
+   #include <SoftwareSerial.h>
+   ```
+
+2. Basic configuration:
+   ```cpp
+   // GSM configuration
+   #define GSM_RX_PIN 0
+   #define GSM_TX_PIN 1
+   ```
+
+## Testing and Verification
+
+1. Wi-Fi HaLow Connection Test:
+   - Check signal strength
+   - Verify data transmission
+   - Monitor power consumption
+
+2. GSM Backup System Test:
+   - Verify network registration
+   - Test SMS functionality
+   - Test data transmission
+   - Check automatic failover from Wi-Fi
+
+## Troubleshooting
+
+### Common Issues
+
+1. Wi-Fi HaLow Connection:
+   - Check antenna orientation
+   - Verify power supply stability
+   - Check for interference sources
+
+2. GSM Module:
+   - Verify SIM card installation
+   - Check signal strength
+   - Monitor power supply voltage
+
+## Safety Considerations
+
+1. Power Management:
+   - Use appropriate voltage regulators
+   - Monitor heat generation
+   - Implement overcurrent protection
+
+2. Antenna Placement:
+   - Keep antennas away from metal objects
+   - Maintain minimum separation between Wi-Fi and GSM antennas
+   - Consider RF exposure guidelines
+
+## Maintenance
+
+1. Regular Checks:
+   - Power supply voltage levels
+   - Connection quality
+   - Physical connections
+   - Antenna condition
+
+2. Periodic Updates:
+   - Firmware updates for modules
+   - Configuration optimization
+   - Performance monitoring
+
 ## Required Components
 
 ### 1. Core Hardware
@@ -145,54 +286,6 @@ Level Shifter:
 3. Train models
 4. Validate performance
 5. Deploy updates
-
-## Troubleshooting
-
-### 1. Common Issues
-- **Sensor Communication**
-  - Check I2C connections
-  - Verify power supply
-  - Test pull-up resistors
-  - Monitor signal integrity
-
-- **Data Quality**
-  - Verify calibration
-  - Check sensor alignment
-  - Monitor temperature
-  - Validate readings
-
-- **ML Performance**
-  - Check model accuracy
-  - Monitor inference time
-  - Validate predictions
-  - Update training data
-
-### 2. Error Recovery
-1. Power cycle system
-2. Reset sensors
-3. Reload calibration
-4. Verify connections
-5. Check logs
-
-## Maintenance
-
-### 1. Regular Checks
-- Sensor alignment
-- Connection integrity
-- Power supply stability
-- Temperature monitoring
-
-### 2. ML Model Updates
-- Data collection
-- Model training
-- Performance validation
-- Deployment
-
-### 3. System Updates
-- Firmware updates
-- Calibration updates
-- Configuration updates
-- Security patches
 
 ## Next Steps
 

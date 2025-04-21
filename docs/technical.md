@@ -1,5 +1,176 @@
 # ColorSenseAI Technical Documentation
 
+## System Architecture
+
+### Hardware Components
+
+1. Core Processing Unit
+   - Arduino Mega 2560 (or compatible)
+   - Processing capabilities: 16 MHz
+   - Memory: 256 KB Flash, 8 KB SRAM
+
+2. Connectivity Stack
+   - Primary: Wi-Fi HaLow Module
+     - IEEE 802.11ah compliant
+     - Operating frequency: 900 MHz
+     - Range: up to 1 km
+     - Low power consumption
+     - Ideal for IoT applications
+   
+   - Backup: GSM Module
+     - Model: SIM800L/SIM900
+     - Quad-band support
+     - GPRS connectivity
+     - SMS capabilities
+     - Automatic failover system
+
+3. Sensor Array
+   - Color Sensors: TCS34725
+   - Additional sensors as needed
+
+### Software Architecture
+
+1. Firmware Layer
+   - Arduino core system
+   - Hardware abstraction layer
+   - Device drivers
+   - Communication protocols
+
+2. Middleware
+   - Connection management
+   - Data buffering
+   - Error handling
+   - Failover logic
+
+3. Application Layer
+   - Color analysis algorithms
+   - AI model integration
+   - Data processing
+   - User interface
+
+## Communication Protocol
+
+### Primary Channel (Wi-Fi HaLow)
+1. Data Format:
+   ```json
+   {
+     "device_id": "string",
+     "timestamp": "ISO8601",
+     "readings": {
+       "color": {
+         "r": int,
+         "g": int,
+         "b": int
+       },
+       "ambient": float,
+       "temperature": float
+     },
+     "status": {
+       "battery": float,
+       "signal": int
+     }
+   }
+   ```
+
+2. Protocol Stack:
+   - Physical Layer: IEEE 802.11ah
+   - Network Layer: IPv6
+   - Transport Layer: TCP/UDP
+   - Application Layer: MQTT/HTTP
+
+### Backup Channel (GSM)
+1. Data Format:
+   ```json
+   {
+     "id": "string",
+     "ts": "epoch",
+     "data": "base64_encoded_string"
+   }
+   ```
+
+2. Protocol Stack:
+   - Physical Layer: GSM
+   - Transport Layer: TCP
+   - Application Layer: HTTP/MQTT
+
+## Power Management
+
+1. Power Requirements
+   - Main supply: 5V, 2A
+   - Wi-Fi HaLow: 3.3V, 200mA
+   - GSM: 4.2V, 2A peak
+
+2. Power Optimization
+   - Sleep modes
+   - Dynamic frequency scaling
+   - Selective module activation
+
+## Error Handling
+
+1. Communication Errors
+   - Automatic retry mechanism
+   - Channel switching logic
+   - Error logging and reporting
+
+2. Hardware Errors
+   - Watchdog timer
+   - Auto-reset capabilities
+   - Error recovery procedures
+
+## Security Measures
+
+1. Data Security
+   - End-to-end encryption
+   - Secure boot
+   - Secure storage
+
+2. Network Security
+   - WPA3 for Wi-Fi
+   - SSL/TLS for data transmission
+   - Access control mechanisms
+
+## Performance Metrics
+
+1. Response Time
+   - Sensor reading: < 100ms
+   - Data processing: < 200ms
+   - Network transmission: < 300ms
+
+2. Reliability
+   - Uptime target: 99.9%
+   - Error rate: < 0.1%
+   - Failover time: < 5s
+
+## Development Guidelines
+
+1. Code Structure
+   - Modular design
+   - Clear documentation
+   - Version control
+
+2. Testing Requirements
+   - Unit tests
+   - Integration tests
+   - Performance tests
+   - Security tests
+
+## Deployment Process
+
+1. Initial Setup
+   - Hardware assembly
+   - Firmware flashing
+   - Network configuration
+
+2. Testing Phase
+   - Component testing
+   - System integration
+   - Field testing
+
+3. Maintenance
+   - Regular updates
+   - Performance monitoring
+   - Security patches
+
 ## Development Environment
 ### Wymagania Sprzętowe
 - Arduino UNO lub kompatybilny

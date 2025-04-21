@@ -1,0 +1,1 @@
+ColorSenseAI: Advanced color analysis system combining AI with IoT capabilities. Features Arduino-based hardware with Wi-Fi HaLow for long-range connectivity and GSM backup. Perfect for industrial color sensing and processing applications requiring reliable data transmission. 
